@@ -128,7 +128,7 @@ public class UserInterface {
 		contentPanel.setLayout(null);
 		
 				JTextPane txtpnTest = new JTextPane();
-				txtpnTest.setFont(new Font("Tahoma", Font.PLAIN, 17));
+				txtpnTest.setFont(new Font("Tahoma", Font.PLAIN, 12));
 				txtpnTest.setBounds(10, 10, 871, 481);
 				contentPanel.add(txtpnTest);
                 txtpnTest.setText(GoldenSection.finalValue);
