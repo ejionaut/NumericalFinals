@@ -12,13 +12,12 @@ public class GoldenSection {
 
     public static void main(String[] args) {
         UserInterface.userInput();
-        UserInterface.instruct();
     }
 
-    public static void start(String function, int upper, int lower, int iterations){
+    public static void start(String function, int lower, int upper, int iterations){
         functionValue(function);
-        interval1 = upper;
-        interval2 = lower;
+        interval1 = lower;
+        interval2 = upper;
         iteration = iterations;
         equation = function;
         compute();
@@ -29,16 +28,13 @@ public class GoldenSection {
      */
     public static void compute() {
         double xl, xu;
-        double d;
+        double d = 0;
         double x1 = 0, x2 = 0;
         double fx1 = 0, fx2 = 0;
-        DecimalFormat df2 = new DecimalFormat("#.####");
         String storage = "";
-        String header = "";
 
-        header += "\nEquation: "+ equation;
-        header += "\nInterval: ("+ (int) interval1 +", "+ (int) interval2 +")";
-        storage += header;
+        storage += "\nEquation: "+ equation;
+        storage += "\nInterval: ("+ (int) interval1 +", "+ (int) interval2 +")";
 
         storage += String.format("\n%5s %10s %10s %10s %10s %10s %11s %10s\n","iter", "xl", "xu", "d", "x1", "x2", "f(x1)", "f(x2)");
 
@@ -49,6 +45,7 @@ public class GoldenSection {
             x1 = xl + d;
             x2 = xu - d;
 
+            System.out.println("xu: " +xu);
             fx1 = 0;
             for (int i = 0; i < coefficients.length; i++) {
                 fx1 += coefficients[i] * Math.pow(x1, exponents[i]);
@@ -93,7 +90,7 @@ public class GoldenSection {
                 exponents[i] = Integer.parseInt(test[2]);
             } else {
                 coefficients[i] = Double.parseDouble(test[0]);
-                exponents[i] = 0;
+                exponents[i] = 1;
             }
         }
     }

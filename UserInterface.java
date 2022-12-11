@@ -9,59 +9,58 @@ import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.awt.SystemColor;
 import java.awt.Font;
 
 public class UserInterface {
-
+	private static JFrame userInputFrame;
     public static void userInput(){
-        JFrame mainPanel = new JFrame("Solution");
-		mainPanel.setIconImage(Toolkit.getDefaultToolkit().getImage("images/calculate_FILL0_wght400_GRAD0_opsz48.png"));
-		mainPanel.setTitle("Golden Search");
-		mainPanel.getContentPane().setBackground(new Color(255, 255, 255));
-		mainPanel.setSize(539,359);
-		mainPanel.setLocationRelativeTo(null);
-		mainPanel.getContentPane().setLayout(null);
-        mainPanel.setDefaultCloseOperation(mainPanel.HIDE_ON_CLOSE);
+		userInputFrame = new JFrame("Solution");
+		userInputFrame.setIconImage(Toolkit.getDefaultToolkit().getImage("images/calculate_FILL0_wght400_GRAD0_opsz48.png"));
+		userInputFrame.setTitle("Golden Search");
+		userInputFrame.getContentPane().setBackground(new Color(255, 255, 255));
+		userInputFrame.setSize(539,359);
+		userInputFrame.setLocationRelativeTo(null);
+		userInputFrame.getContentPane().setLayout(null);
+        userInputFrame.setDefaultCloseOperation(userInputFrame.HIDE_ON_CLOSE);
 		
 		JLabel uiMainTextLogo = new JLabel("Golden-Section Search");
 		uiMainTextLogo.setForeground(SystemColor.controlDkShadow);
 		uiMainTextLogo.setFont(new Font("Segoe UI", Font.PLAIN, 24));
 		uiMainTextLogo.setBounds(138, 7, 258, 56);
-		mainPanel.getContentPane().add(uiMainTextLogo);
+		userInputFrame.getContentPane().add(uiMainTextLogo);
 				
 				JLabel lblSolveFor = new JLabel("Solve for: ");
 				lblSolveFor.setForeground(SystemColor.controlDkShadow);
 				lblSolveFor.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 				lblSolveFor.setBounds(663, 10, 258, 56);
-				mainPanel.getContentPane().add(lblSolveFor);
+				userInputFrame.getContentPane().add(lblSolveFor);
 				
 				JTextField functionValue = new JTextField();
 				functionValue.setBounds(62, 87, 380, 28);
-				mainPanel.getContentPane().add(functionValue);
+				userInputFrame.getContentPane().add(functionValue);
 				functionValue.setColumns(10);
 				
 				JTextField initialLower = new JTextField();
 				initialLower.setColumns(10);
 				initialLower.setBounds(62, 152, 185, 28);
-				mainPanel.getContentPane().add(initialLower);
+				userInputFrame.getContentPane().add(initialLower);
 				
 				JTextField initialUpper = new JTextField();
 				initialUpper.setColumns(10);
 				initialUpper.setBounds(257, 152, 185, 28);
-				mainPanel.getContentPane().add(initialUpper);
+				userInputFrame.getContentPane().add(initialUpper);
 
 				JTextField iterationsTextField = new JTextField();
 				iterationsTextField.setColumns(10);
 				iterationsTextField.setBounds(211, 201, 231, 28);
-				mainPanel.getContentPane().add(iterationsTextField);
+				userInputFrame.getContentPane().add(iterationsTextField);
 				
 				JButton calculateBTN = new JButton("Calculate");
                 calculateBTN.setForeground(new Color(255, 255, 255));
 				calculateBTN.setBackground(new Color(46, 139, 87));
 				calculateBTN.setFont(new Font("Segoe UI Symbol", Font.PLAIN, 15));
-				calculateBTN.setBounds(63, 257, 379, 34);
+				calculateBTN.setBounds(211, 257, 231, 34);
 				calculateBTN.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						try {
@@ -70,6 +69,7 @@ public class UserInterface {
 							int upperBound = Integer.parseInt(initialUpper.getText());
 							int iterations = Integer.parseInt(iterationsTextField.getText());
 							GoldenSection.start(fValue, lowerBound, upperBound, iterations);
+							userInputFrame.setVisible(false);
 							showOutput();
 						} catch (Exception a) {
 							showError();
@@ -77,33 +77,47 @@ public class UserInterface {
 	
 					}
 				});
-				mainPanel.getContentPane().add(calculateBTN);
+				userInputFrame.getContentPane().add(calculateBTN);
 				
 				JLabel initialLowerLabel = new JLabel("xl");
 				initialLowerLabel.setForeground(SystemColor.controlDkShadow);
 				initialLowerLabel.setFont(new Font("Segoe UI", Font.PLAIN, 17));
 				initialLowerLabel.setBounds(62, 120, 31, 43);
-				mainPanel.getContentPane().add(initialLowerLabel);
+				userInputFrame.getContentPane().add(initialLowerLabel);
 				
 				JLabel fLabel = new JLabel("F(x)");
 				fLabel.setForeground(SystemColor.controlDkShadow);
 				fLabel.setFont(new Font("Segoe UI", Font.PLAIN, 17));
 				fLabel.setBounds(62, 49, 31, 43);
-				mainPanel.getContentPane().add(fLabel);
+				userInputFrame.getContentPane().add(fLabel);
 				
 				JLabel initialUpperLabel = new JLabel("xu");
 				initialUpperLabel.setForeground(SystemColor.controlDkShadow);
 				initialUpperLabel.setFont(new Font("Segoe UI", Font.PLAIN, 17));
 				initialUpperLabel.setBounds(256, 120, 31, 43);
-				mainPanel.getContentPane().add(initialUpperLabel);
+				userInputFrame.getContentPane().add(initialUpperLabel);
 				
 				JLabel iterationsLabel = new JLabel("No. of Iterations:");
 				iterationsLabel.setForeground(SystemColor.controlDkShadow);
 				iterationsLabel.setFont(new Font("Segoe UI", Font.PLAIN, 17));
 				iterationsLabel.setBounds(65, 190, 138, 43);
-				mainPanel.getContentPane().add(iterationsLabel);
-		mainPanel.setVisible(true);
-		mainPanel.setResizable(false);
+				userInputFrame.getContentPane().add(iterationsLabel);
+				userInputFrame.setVisible(true);
+				userInputFrame.setResizable(false);
+
+				JButton btnInstructions = new JButton("Instructions");
+				btnInstructions.setForeground(Color.WHITE);
+				btnInstructions.setFont(new Font("Segoe UI Symbol", Font.PLAIN, 15));
+				btnInstructions.setBackground(new Color(46, 139, 87));
+				btnInstructions.setBounds(63, 257, 138, 34);
+				btnInstructions.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						instruct();
+					}
+				});
+				userInputFrame.getContentPane().add(btnInstructions);
+				userInputFrame.setVisible(true);
+				userInputFrame.setResizable(false);
     }
    
     private static void showOutput() {
@@ -119,7 +133,7 @@ public class UserInterface {
 		JLabel uiMainTextLogo = new JLabel("Golden-Section Search");
 		uiMainTextLogo.setForeground(SystemColor.controlDkShadow);
 		uiMainTextLogo.setFont(new Font("Segoe UI", Font.PLAIN, 24));
-		uiMainTextLogo.setBounds(321, 26, 258, 56);
+		uiMainTextLogo.setBounds(325, 12, 258, 56);
 		mainPanel.getContentPane().add(uiMainTextLogo);
 		
 		JPanel contentPanel = new JPanel();
@@ -128,7 +142,7 @@ public class UserInterface {
 		contentPanel.setLayout(null);
 		
 				JTextPane txtpnTest = new JTextPane();
-				txtpnTest.setFont(new Font("Tahoma", Font.PLAIN, 12));
+				txtpnTest.setFont(new Font("Tahoma", Font.PLAIN, 13));
 				txtpnTest.setBounds(10, 10, 871, 481);
 				contentPanel.add(txtpnTest);
                 txtpnTest.setText(GoldenSection.finalValue);
@@ -137,8 +151,22 @@ public class UserInterface {
 				JLabel lblSolveFor = new JLabel("Solve for: " + GoldenSection.equation);
 				lblSolveFor.setForeground(SystemColor.controlDkShadow);
 				lblSolveFor.setFont(new Font("Segoe UI", Font.PLAIN, 15));
-				lblSolveFor.setBounds(663, 10, 258, 56);
+				lblSolveFor.setBounds(30, 15, 258, 56);
 				mainPanel.getContentPane().add(lblSolveFor);
+
+				JButton backBtn = new JButton("Back");
+					backBtn.setBackground(new Color(0, 128, 0));
+					backBtn.setForeground(SystemColor.text);
+					backBtn.setFont(new Font("Segoe UI Symbol", Font.PLAIN, 17));
+					backBtn.setBounds(731, 26, 178, 40);
+					backBtn.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							mainPanel.setVisible(false);
+							userInput();
+						}
+					});
+					mainPanel.getContentPane().add(backBtn);
+
 		mainPanel.setVisible(true);
 		mainPanel.setResizable(false);
     }
@@ -182,7 +210,7 @@ public class UserInterface {
 		mainPanel.setTitle("Instructions");
 		mainPanel.getContentPane().setBackground(new Color(255, 255, 255));
 		mainPanel.setSize(539,359);
-		mainPanel.setLocationRelativeTo(null);
+		mainPanel.setLocationRelativeTo(userInputFrame);
 		mainPanel.getContentPane().setLayout(null);
         mainPanel.setDefaultCloseOperation(mainPanel.HIDE_ON_CLOSE);
 		
@@ -210,7 +238,7 @@ public class UserInterface {
 				panel.setLayout(null);
 				
 				JTextPane txtpnThisProgramAccepts = new JTextPane();
-				txtpnThisProgramAccepts.setFont(new Font("Segoe UI Light", Font.PLAIN, 17));
+				txtpnThisProgramAccepts.setFont(new Font("Segoe UI Light", Font.PLAIN, 15));
 				txtpnThisProgramAccepts.setText("This program accepts positive and negative values. \r\nFor function values please follow this format:\r\n\t3x^2+5x-7 -> 3x^2/5x/-7\r\n\r\nFor it to work as intended!");
 				txtpnThisProgramAccepts.setBounds(10, 10, 378, 135);
 				panel.add(txtpnThisProgramAccepts);
