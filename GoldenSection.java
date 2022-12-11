@@ -1,5 +1,3 @@
-import java.text.DecimalFormat;
-
 public class GoldenSection {
     public static int terms;
     public static String equation;
@@ -45,11 +43,11 @@ public class GoldenSection {
             x1 = xl + d;
             x2 = xu - d;
 
-            System.out.println("xu: " +xu);
             fx1 = 0;
             for (int i = 0; i < coefficients.length; i++) {
                 fx1 += coefficients[i] * Math.pow(x1, exponents[i]);
             }
+
             fx2 = 0;
             for (int j = 0; j < coefficients.length; j++) {
                 fx2 += coefficients[j] * Math.pow(x2, exponents[j]);
@@ -76,7 +74,9 @@ public class GoldenSection {
         finalValue = storage;
     } // end of compute method
 
-    
+    /**
+     * Method for computation to split the input function then store
+     */
     private static void functionValue(String function){
         String[] storage = function.split("[/]");
         coefficients = new double[storage.length];
